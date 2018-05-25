@@ -37,7 +37,7 @@ router.get('/existEmployee', async (ctx, next) => {
 router.get('/getEmployeePerformance', async (ctx, next) => {
   const { chineseName } = ctx.request.query;
   const result = await databaseQuery(`
-    Select performance.*, employees.id as employeesId From performance
+    Select performance.* as employeesId From performance
     Right Join employees On performance.employeeId = employees.id
     AND employees.chineseName = ?`, [chineseName]);
   ctx.body = result;
