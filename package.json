@@ -1,0 +1,27 @@
+{
+  "name": "kylin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Backlighting-Neo/kylin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Backlighting-Neo/kylin/issues"
+  },
+  "homepage": "https://github.com/Backlighting-Neo/kylin#readme",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "mysql": "^2.15.0"
+  }
+}
