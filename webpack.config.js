@@ -50,16 +50,11 @@ module.exports = (options = {}) => ({
       filename: 'index.html',
       template: 'src/index.html',
       chunks: ['app', 'vendor', 'manifest'],
-      alwaysWriteToDisk: true
     }),
     new HtmlWebpackPlugin({
       filename: 'admin.html',
       template: 'src/index.html',
       chunks: ['admin', 'vendor', 'manifest'],
-      alwaysWriteToDisk: true
-    }),
-    new HtmlWebpackHarddiskPlugin({
-      outputPath: resolve(__dirname, 'dist'),
     })
   ],
   resolve: {
