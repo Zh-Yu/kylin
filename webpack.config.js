@@ -1,6 +1,7 @@
 const resolve = require('path').resolve
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const url = require('url')
 const publicPath = ''
 
@@ -48,12 +49,17 @@ module.exports = (options = {}) => ({
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      chunks: ['app', 'vendor', 'manifest']
+      chunks: ['app', 'vendor', 'manifest'],
+      alwaysWriteToDisk: true
     }),
     new HtmlWebpackPlugin({
       filename: 'admin.html',
       template: 'src/index.html',
-      chunks: ['admin', 'vendor', 'manifest']
+      chunks: ['admin', 'vendor', 'manifest'],
+      alwaysWriteToDisk: true
+    }),
+    new HtmlWebpackHarddiskPlugin({
+      outputPath: resolve(__dirname, 'dist'),
     })
   ],
   resolve: {
@@ -75,7 +81,11 @@ module.exports = (options = {}) => ({
       }
     },
     historyApiFallback: {
-      index: url.parse(options.dev ? '/assets/' : publicPath).pathname
+      index: url.parse(options.dev ? '/assets/' : publicPath).pathname,
+      rewrites: [
+        { from: /^\/admin.html/, to: '/dist/admin.html' },
+        { from: /^\/index.html/, to: '/dist/index.html' }
+      ]
     }
   },
   devtool: options.dev ? '#eval-source-map' : '#source-map'
