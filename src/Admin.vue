@@ -1,30 +1,48 @@
 <template>
   <div id="app">
-    Admin
+    <el-table :data="reportList" border style="width: 100%">
+      <el-table-column prop="employeeTeamChineseName" label="部门" width="80" fixed>
+      </el-table-column>
+      <el-table-column prop="employeeChineseName" label="姓名" width="80" fixed>
+      </el-table-column>
+      <el-table-column
+        v-for="(value, key) in bizType"
+        :label="value"
+        >
+        <template slot-scope="scope">
+          {{scope.row.valueList[key] || ''}}
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
   import axios from 'axios';
-
-  const serverPrefix = 'http://localhost:3000';
+  import { serverPrefix } from './config.js';
 
   export default {
     data() {
       return {
-        step: 0,
-        fetchExistEmployee: false,
-        isSaving: false,
-        employeeChineseName: '',
-        employeeId: -1,
-        performance: [],
-        diff: []
+        reportList: [],
+        bizType: {}
       }
     },
 
-    
+    methods: {
+      async fetch() {
+        const bizType = await axios.get(`${serverPrefix}/bizType`);
+        this.bizType = bizType.data.reduce((prev, cur) => {
+          prev[cur.id] = cur.chineseName;
+          return prev;
+        }, {});
+        const report = await axios.get(`${serverPrefix}/report`);
+        this.reportList = report.data;
+      }
+    },
+
     mounted() {
-      
+      this.fetch();
     }
   }
 </script>

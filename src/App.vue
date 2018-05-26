@@ -35,8 +35,7 @@
 
 <script>
   import axios from 'axios';
-
-  const serverPrefix = 'http://localhost:3000';
+  import {serverPrefix} from './config.js';
 
   export default {
     data() {
