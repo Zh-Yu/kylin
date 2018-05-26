@@ -1,1 +1,1 @@
-export const serverPrefix = 'http://localhost:3000';
+export const serverPrefix = 'http://kylin.tool.tangzongchao.com/api';
